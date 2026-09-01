@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重返帝国‑联盟CRM管理系统</title>
+    <style>
+        * { box-sizing: border-box; font-family: system-ui, -apple-system, sans-serif; }
+        body { padding: 12px; background: #1a202c; color: #fff; max-width: 1000px; margin: 0 auto; }
+        h2 { text-align: center; margin-bottom: 20px; }
+        .box { background: #2d3748; border-radius: 10px; padding: 15px; margin-bottom: 15px; }
+        .box h3 { margin-top: 0; margin-bottom: 10px; color: #cbd5e0; }
+        input, select { 
+            width: 100%; 
+            padding: 10px; 
+            margin: 6px 0; 
+            border: none; 
+            border-radius: 6px; 
+            color: #000; 
+            outline: none;
+        }
+        button { 
+            padding: 10px 14px; 
+            border: none; 
+            border-radius: 6px; 
+            margin: 4px; 
+            background: #3182ce; 
+            color: white; 
+            cursor: pointer; 
+            transition: background 0.2s;
+        }
+        button:hover { background: #2b6cb0; }
+        .del { background: #e53e3e; }
+        .del:hover { background: #c53030; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+        th, td { border: 1px solid #4a5568; padding: 8px; text-align: center; }
+        th { background: #4a5568; color: #e2e8f0; }
+        tr:nth-child(even) { background: #2c3444; }
+        .table-wrapper { overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h2>🏰 重返帝国 联盟成员CRM</h2>
+    
+    <div class="box">
+        <h3>➕ 新增成员</h3>
+        <input id="name" placeholder="游戏昵称">
+        <input id="uid" placeholder="玩家ID">
+        <input id="zone" placeholder="区服">
+        <input id="power" placeholder="战力数值">
+        <input id="pos" placeholder="主城坐标">
+        <select id="host">
+            <option value="否">无托管</option>
+            <option value="是">账号托管</option>
+        </select>
+        <input id="note" placeholder="备注">
+        <button onclick="addRow()">添加记录</button>
+    </div>
+    
+    <div class="box">
+        <h3>📋 成员列表台账</h3>
+        <div class="table-wrapper">
+            <table id="table">
+                <thead>
+                    <tr>
+                        <th>昵称</th>
+                        <th>ID</th>
+                        <th>区服</th>
+                        <th>战力</th>
+                        <th>坐标</th>
+                        <th>托管</th>
+                        <th>备注</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+<script>
+    let list = JSON.parse(localStorage.getItem("realmCrm")) || [];
+
+    function render() {
+        const tb = document.querySelector("#table tbody");
+        tb.innerHTML = "";
+        
+        if (list.length === 0) {
+            tb.innerHTML = '<tr><td colspan="8" style="color:#718096; padding:20px;">暂无成员数据，请添加</td></tr>';
+        } else {
+            list.forEach((item, idx) => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${escapeHtml(item.name)}</td>
+                    <td>${escapeHtml(item.uid)}</td>
+                    <td>${escapeHtml(item.zone)}</td>
+                    <td>${escapeHtml(item.power)}</td>
+                    <td>${escapeHtml(item.pos)}</td>
+                    <td>${escapeHtml(item.host)}</td>
+                    <td>${escapeHtml(item.note)}</td>
+                    <td><button class="del" onclick="del(${idx})">删除</button></td>
+                `;
+                tb.appendChild(tr);
+            });
+        }
+        save();
+    }
+
+    function addRow() {
+        const data = {
+            name: document.getElementById("name").value.trim(),
+            uid: document.getElementById("uid").value.trim(),
+            zone: document.getElementById("zone").value.trim(),
+            power: document.getElementById("power").value.trim(),
+            pos: document.getElementById("pos").value.trim(),
+            host: document.getElementById("host").value,
+            note: document.getElementById("note").value.trim()
+        };
+
+        if (!data.name || !data.uid) {
+            alert("请至少填写游戏昵称和玩家ID！");
+            return;
+        }
+
+        list.push(data);
+        render();
+        
+        document.querySelectorAll("input").forEach(i => i.value = "");
+        document.getElementById("host").selectedIndex = 0;
+    }
+
+    function del(i) {
+        if (confirm(`确定要删除成员 "${list[i].name}" 吗？`)) {
+            list.splice(i, 1);
+            render();
+        }
+    }
+
+    function save() {
+        localStorage.setItem("realmCrm", JSON.stringify(list));
+    }
+
+    function escapeHtml(text) {
+        if (!text) return '';
+        const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+        return text.replace(/[&<>"']/g, m => map[m]);
+    }
+
+    render();
+</script>
+</body>
+</html>
