@@ -1,152 +1,159 @@
-<!文档类型html >
-<超文本标记语言 语言=“zh-CN”zh-CN
-<头>
-    <自指的 字符集=“UTF八号“UTF八号"
-    <自指的 名字="视窗" 内容=宽度=设备宽度，初始比例=1.0>
-    <标题>重返帝国‑联盟客户关系管理管理系统</标题>
-    <风格>
-        * { 盒子尺寸: 边框; 字体系列: 系统用户界面, -苹果系统, 无衬线字体; }
-        身体 { 填料: 12像素; 背景:# 1a202c颜色:# fff最大宽度: 1000像素; 边缘: 0 汽车; }
-        氘 { 文本对齐: 中心; 页边距-底部: 20像素; }
-        .箱子 { 背景:# 2d3748边框半径: 10像素; 填料: 15像素; 页边距-底部: 15像素; }
-        .箱子 h3 { 上边距: 0; 页边距-底部: 10像素; 颜色:# cbd5e0}
-        投入, 挑选 { 
-            宽度: 100%; 
-            填料: 10像素; 
-            边缘: 6像素 0; 
-            边界: 没有人; 
-            边框半径: 6像素; 
-            颜色: #000; 
-            概述: 没有人;
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重返帝国·联盟CRM</title>
+    <style>
+        :root { --gold: #d4af37; --dark: #121212; --card: #1e1e1e; --text: #e0e0e0; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Microsoft YaHei', sans-serif; }
+        body { background: var(--dark); color: var(--text); padding: 15px; min-height: 100vh; }
+        
+        /* 头部样式 */
+        header { text-align: center; padding: 20px 0; border-bottom: 2px solid var(--gold); margin-bottom: 20px; }
+        h1 { color: var(--gold); font-size: 1.8rem; text-shadow: 0 0 10px rgba(212,175,55,0.3); }
+        p { font-size: 0.9rem; color: #888; margin-top: 5px; }
+
+        /* 表单区域 */
+        .form-box { background: var(--card); padding: 15px; border-radius: 8px; border: 1px solid #333; margin-bottom: 20px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        input, select { width: 100%; padding: 10px; background: #2c2c2c; border: 1px solid #444; color: #fff; border-radius: 4px; font-size: 0.9rem; }
+        input:focus, select:focus { outline: none; border-color: var(--gold); }
+        button { grid-column: span 2; padding: 12px; background: var(--gold); color: #000; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.3s; }
+        button:hover { background: #b5952f; }
+
+        /* 列表样式 */
+        .list-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .stats { color: var(--gold); font-size: 0.9rem; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        th { background: #2c2c2c; color: var(--gold); padding: 10px; text-align: left; position: sticky; top: 0; }
+        td { padding: 10px; border-bottom: 1px solid #333; vertical-align: middle; }
+        tr:hover { background: #252525; }
+        
+        /* 标签样式 */
+        .tag { padding: 2px 6px; border-radius: 3px; font-size: 0.75rem; font-weight: bold; }
+        .tag-host { background: rgba(212,175,55,0.2); color: var(--gold); border: 1px solid var(--gold); }
+        .tag-normal { background: #333; color: #888; border: 1px solid #444; }
+        
+        /* 删除按钮 */
+        .btn-del { background: transparent; border: 1px solid #e53e3e; color: #e53e3e; padding: 4px 8px; font-size: 0.75rem; margin: 0; cursor: pointer; }
+        .btn-del:hover { background: #e53e3e; color: #fff; }
+
+        /* 移动端适配 */
+        @media(max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+            button { grid-column: span 1; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 8px 5px; }
         }
-        按钮 { 
-            填料: 10像素 14像素; 
-            边界: 没有人; 
-            边框半径: 6像素; 
-            边缘: 4像素; 
-            背景:# 3182ce
-            颜色: 白色; 
-            光标: 指针; 
-            过渡: 背景 0.2s;
-        }
-        button:hover { background: #2b6cb0; }
-        .del { background: #e53e3e; }
-        .del:hover { background: #c53030; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
-        th, td { border: 1px solid #4a5568; padding: 8px; text-align: center; }
-        th { background: #4a5568; color: #e2e8f0; }
-        tr:nth-child(even) { background: #2c3444; }
-        .table-wrapper { overflow-x: auto; }
     </style>
 </head>
 <body>
-    <h2>🏰 重返帝国 联盟成员CRM</h2>
-    
-    <div class="box">
-        <h3>➕ 新增成员</h3>
-        <input id="name" placeholder="游戏昵称">
-        <input id="uid" placeholder="玩家ID">
-        <input id="zone" placeholder="区服">
-        <input id="power" placeholder="战力数值">
-        <input id="pos" placeholder="主城坐标">
+
+<header>
+    <h1>⚔️ 联盟成员 CRM</h1>
+    <p>重返帝国 · 联盟管理专用 · 数据本地存储</p>
+</header>
+
+<!-- 录入区 -->
+<div class="form-box">
+    <div class="grid">
+        <input type="text" id="name" placeholder="游戏昵称">
+        <input type="text" id="uid" placeholder="玩家ID">
+        <input type="text" id="power" placeholder="战力数值">
+        <input type="text" id="pos" placeholder="主城坐标 (如: 456,789)">
         <select id="host">
             <option value="否">无托管</option>
             <option value="是">账号托管</option>
         </select>
-        <input id="note" placeholder="备注">
-        <button onclick="addRow()">添加记录</button>
+        <input type="text" id="note" placeholder="备注 (如: 主力/二队/活跃)">
+        <button onclick="addMember()">➕ 添加成员</button>
     </div>
-    
-    <div class="box">
-        <h3>📋 成员列表台账</h3>
-        <div class="table-wrapper">
-            <table id="table">
-                <thead>
-                    <tr>
-                        <th>昵称</th>
-                        <th>ID</th>
-                        <th>区服</th>
-                        <th>战力</th>
-                        <th>坐标</th>
-                        <th>托管</th>
-                        <th>备注</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>
-    </div>
+</div>
+
+<!-- 列表区 -->
+<div class="list-header">
+    <span>📋 成员台账</span>
+    <span class="stats" id="stats">共 0 人 | 总战力: 0</span>
+</div>
+
+<div style="overflow-x: auto;">
+    <table>
+        <thead>
+            <tr>
+                <th>昵称</th>
+                <th>ID</th>
+                <th>战力</th>
+                <th>坐标</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody id="list"></tbody>
+    </table>
+</div>
 
 <script>
-    let list = JSON.parse(localStorage.getItem("realmCrm")) || [];
+    // 1. 初始化数据
+    let members = JSON.parse(localStorage.getItem('realm_crm_members')) || [];
 
+    // 2. 渲染列表
     function render() {
-        const tb = document.querySelector("#table tbody");
-        tb.innerHTML = "";
+        const listEl = document.getElementById('list');
+        const statsEl = document.getElementById('stats');
+        listEl.innerHTML = '';
         
-        if (list.length === 0) {
-            tb.innerHTML = '<tr><td colspan="8" style="color:#718096; padding:20px;">暂无成员数据，请添加</td></tr>';
-        } else {
-            list.forEach((item, idx) => {
-                const tr = document.createElement("tr");
-                tr.innerHTML = `
-                    <td>${escapeHtml(item.name)}</td>
-                    <td>${escapeHtml(item.uid)}</td>
-                    <td>${escapeHtml(item.zone)}</td>
-                    <td>${escapeHtml(item.power)}</td>
-                    <td>${escapeHtml(item.pos)}</td>
-                    <td>${escapeHtml(item.host)}</td>
-                    <td>${escapeHtml(item.note)}</td>
-                    <td><button class="del" onclick="del(${idx})">删除</button></td>
-                `;
-                tb.appendChild(tr);
-            });
-        }
+        let totalPower = 0;
+        
+        // 按战力倒序排列
+        members.sort((a, b) => parseInt(b.power || 0) - parseInt(a.power || 0));
+
+        members.forEach((m, index) => {
+            totalPower += parseInt(m.power || 0);
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><strong>${m.name}</strong></td>
+                <td style="color:#888">${m.uid}</td>
+                <td style="color:#4fd1c5">${Number(m.power).toLocaleString()}</td>
+                <td>${m.pos}</td>
+                <td>
+                    ${m.host === '是' 
+                        ? '<span class="tag tag-host">托管</span>' 
+                        : '<span class="tag tag-normal">本人</span>'}
+                </td>
+                <td><button class="btn-del" onclick="delMember(${index})">删除</button></td>
+            `;
+            listEl.appendChild(tr);
+        });
+
+        statsEl.innerText = `共 ${members.length} 人 | 总战力: ${totalPower.toLocaleString()}`;
         save();
     }
 
-    function addRow() {
-        const data = {
-            name: document.getElementById("name").value.trim(),
-            uid: document.getElementById("uid").value.trim(),
-            zone: document.getElementById("zone").value.trim(),
-            power: document.getElementById("power").value.trim(),
-            pos: document.getElementById("pos").value.trim(),
-            host: document.getElementById("host").value,
-            note: document.getElementById("note").value.trim()
-        };
-
-        if (!data.name || !data.uid) {
-            alert("请至少填写游戏昵称和玩家ID！");
-            return;
-        }
-
-        list.push(data);
-        render();
+    // 3. 添加成员
+    function addMember() {
+        const name = document.getElementById('name').value.trim();
+        const uid = document.getElementById('uid').value.trim();
         
-        document.querySelectorAll("input").forEach(i => i.value = "");
-        document.getElementById("host").selectedIndex = 0;
+        if (!name || !uid) { alert('⚠️ 昵称和ID不能为空！'); return; }
+
+        members.push({
+            name: name,
+            uid: uid,
+            power: document.getElementById('power').value.trim(),
+            pos: document.getElementById('pos').value.trim(),
+            host: document.getElementById('host').value,
+            note: document.getElementById('note').value.trim()
+        });
+
+        // 清空表单
+        document.querySelectorAll('input').forEach(i => i.value = '');
+        document.getElementById('host').selectedIndex = 0;
+        
+        render();
     }
 
-    function del(i) {
-        if (confirm(`确定要删除成员 "${list[i].name}" 吗？`)) {
-            list.splice(i, 1);
-            render();
-        }
-    }
+    // 4. 删除成员
+    function delMember(index) {
+        if(confirm(`确定要移除成员 "
 
-    function save() {
-        localStorage.setItem("realmCrm", JSON.stringify(list));
-    }
-
-    function escapeHtml(text) {
-        if (!text) return '';
-        const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
-        return text.replace(/[&<>"']/g, m => map[m]);
-    }
-
-    render();
-</script>
-</body>
-</html>
