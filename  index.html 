@@ -1,33 +1,33 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>重返帝国‑联盟CRM管理系统</title>
-    <style>
-        * { box-sizing: border-box; font-family: system-ui, -apple-system, sans-serif; }
-        body { padding: 12px; background: #1a202c; color: #fff; max-width: 1000px; margin: 0 auto; }
-        h2 { text-align: center; margin-bottom: 20px; }
-        .box { background: #2d3748; border-radius: 10px; padding: 15px; margin-bottom: 15px; }
-        .box h3 { margin-top: 0; margin-bottom: 10px; color: #cbd5e0; }
-        input, select { 
-            width: 100%; 
-            padding: 10px; 
-            margin: 6px 0; 
-            border: none; 
-            border-radius: 6px; 
-            color: #000; 
-            outline: none;
+<!文档类型html >
+<超文本标记语言 语言=“zh-CN”zh-CN
+<头>
+    <自指的 字符集=“UTF八号“UTF八号"
+    <自指的 名字="视窗" 内容=宽度=设备宽度，初始比例=1.0>
+    <标题>重返帝国‑联盟客户关系管理管理系统</标题>
+    <风格>
+        * { 盒子尺寸: 边框; 字体系列: 系统用户界面, -苹果系统, 无衬线字体; }
+        身体 { 填料: 12像素; 背景:# 1a202c颜色:# fff最大宽度: 1000像素; 边缘: 0 汽车; }
+        氘 { 文本对齐: 中心; 页边距-底部: 20像素; }
+        .箱子 { 背景:# 2d3748边框半径: 10像素; 填料: 15像素; 页边距-底部: 15像素; }
+        .箱子 h3 { 上边距: 0; 页边距-底部: 10像素; 颜色:# cbd5e0}
+        投入, 挑选 { 
+            宽度: 100%; 
+            填料: 10像素; 
+            边缘: 6像素 0; 
+            边界: 没有人; 
+            边框半径: 6像素; 
+            颜色: #000; 
+            概述: 没有人;
         }
-        button { 
-            padding: 10px 14px; 
-            border: none; 
-            border-radius: 6px; 
-            margin: 4px; 
-            background: #3182ce; 
-            color: white; 
-            cursor: pointer; 
-            transition: background 0.2s;
+        按钮 { 
+            填料: 10像素 14像素; 
+            边界: 没有人; 
+            边框半径: 6像素; 
+            边缘: 4像素; 
+            背景:# 3182ce
+            颜色: 白色; 
+            光标: 指针; 
+            过渡: 背景 0.2s;
         }
         button:hover { background: #2b6cb0; }
         .del { background: #e53e3e; }
